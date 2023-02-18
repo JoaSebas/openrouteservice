@@ -3,10 +3,8 @@ while [ ! -f  $1/ors.run ]
 do
   echo "DEBUG: Waiting in folder: $1"
   echo "DEBUG: Current folder ors.run:"
-  echo ""
   ls -sahlS ors.run
   echo "DEBUG: Parent folder ors.run"
-  echo""
   ls -sahlS ../ors.run
   sleep 3
 done
