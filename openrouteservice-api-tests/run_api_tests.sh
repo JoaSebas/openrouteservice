@@ -7,7 +7,7 @@ do
   ls -sahlS
   echo "DEBUG: The parent folder contains:"
   echo""
-  ls -sahlS
+  ls -sahlS ../
   sleep 3
 done
 mvn -B test --file $1/openrouteservice-api-tests/pom.xml
