@@ -2,12 +2,12 @@
 while [ ! -f  $1/ors.run ]
 do
   echo "DEBUG: Waiting in folder: $1"
-  echo "DEBUG: The folder is containing:"
+  echo "DEBUG: Current folder ors.run:"
   echo ""
-  ls -sahlS
-  echo "DEBUG: The parent folder contains:"
+  ls -sahlS ors.run
+  echo "DEBUG: Parent folder ors.run"
   echo""
-  ls -sahlS ../
+  ls -sahlS ../ors.run
   sleep 3
 done
 mvn -B test --file $1/openrouteservice-api-tests/pom.xml
