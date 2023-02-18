@@ -1,7 +1,8 @@
 #!/bin/sh
 while [ ! -f  $1/ors.run ]
 do
-  sleep 1
+  echo "DEBUG: Waiting in folder: $1"
+  sleep 3
 done
 mvn -B test --file $1/openrouteservice-api-tests/pom.xml
 res=$?
