@@ -109,7 +109,7 @@
             "elevation_cache_path": "cgiar_provider",
             "elevation_cache_clear": false,
             "instructions": true,
-            "maximum_distance": 100000,
+            "maximum_distance": 1000000,
             "maximum_distance_dynamic_weights": 100000,
             "maximum_distance_avoid_areas": 100000,
             "maximum_waypoints": 50,
@@ -357,7 +357,7 @@
         }
       },
       {
-        "active": false,
+        "active": true,
         "text": "This message would be sent with every request for geojson response",
         "condition": {
           "api_format": "geojson"
