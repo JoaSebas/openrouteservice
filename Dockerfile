@@ -33,14 +33,14 @@ USER root
 ENV MAVEN_OPTS="-Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
 ENV MAVEN_CLI_OPTS="--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
 
-ARG ORS_CONFIG=openrouteservice/src/main/resources/ors-config-sample.json
+ARG ORS_CONFIG=docker/conf/ors-config.json
 
 WORKDIR /ors-core
 
 COPY openrouteservice/src /ors-core/openrouteservice/src
 COPY openrouteservice/WebContent /ors-core/openrouteservice/WebContent
 COPY openrouteservice/pom.xml /ors-core/openrouteservice/pom.xml
-COPY $ORS_CONFIG /ors-core/openrouteservice/src/main/resources/ors-config-sample.json
+COPY $ORS_CONFIG /ors-core/openrouteservice/src/main/resources/ors-config.json
 
 # Configure ors config:
 # Fist set pipefail to -c to allow intermediate pipes to throw errors
@@ -48,7 +48,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # - Replace paths in ors-config.json to match docker setup
 # - init_threads = 1, > 1 been reported some issues
 # - Delete all profiles but car
-RUN cp /ors-core/openrouteservice/src/main/resources/ors-config-sample.json /ors-core/openrouteservice/src/main/resources/ors-config.json && \
+RUN cp /ors-core/openrouteservice/src/main/resources/ors-config.json /ors-core/openrouteservice/src/main/resources/ors-config.json && \
     jq '.ors.services.routing.sources[0] = "/home/ors/ors-core/data/osm_file.pbf"' /ors-core/openrouteservice/src/main/resources/ors-config.json |sponge /ors-core/openrouteservice/src/main/resources/ors-config.json && \
     jq '.ors.logging.location = "/home/ors/ors-core/logs/ors"' /ors-core/openrouteservice/src/main/resources/ors-config.json |sponge /ors-core/openrouteservice/src/main/resources/ors-config.json && \
     jq '.ors.services.routing.profiles.default_params.elevation_cache_path = "/home/ors/ors-core/data/elevation_cache"' /ors-core/openrouteservice/src/main/resources/ors-config.json |sponge /ors-core/openrouteservice/src/main/resources/ors-config.json && \
@@ -64,7 +64,7 @@ FROM adoptopenjdk/openjdk11:jre-11.0.18_10-alpine as publish
 # Build ARGS
 ARG UID=1000
 ARG GID=1000
-ARG OSM_FILE=./openrouteservice/src/main/files/heidelberg.osm.gz
+ARG OSM_FILE=./docker/ecuador-latest.osm.pbf
 ARG BASE_FOLDER=/home/ors
 
 # Runtime ENVs for tomcat

@@ -32,5 +32,4 @@ target/
 .python-version
 nohup.out
 build/
-logs/
 cgiar_cache/

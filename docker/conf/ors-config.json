@@ -92,7 +92,8 @@
         "elevation_preprocessed": false,
         "profiles": {
           "active": [
-            "car"
+            "car",
+            "walking"
           ],
           "default_params": {
             "encoder_flags_size": 8,
@@ -138,7 +139,7 @@
             "parameters": {
               "encoder_flags_size": 8,
               "encoder_options": "turn_costs=true|block_fords=false|use_acceleration=true",
-              "maximum_distance": 100000,
+              "maximum_distance": 1000000,
               "elevation": true,
               "maximum_snapping_radius": 350,
               "preparation": {
